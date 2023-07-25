@@ -1,20 +1,51 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      CalcSuper
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-grid>
+    <div class="ion-activatable ripple-parent circle"> {{calcularTotal() | currency:'BRL':'symbol':'1.2-2'}}</div>
+    <ion-row style="margin-top: 1%;">
+      <ion-col>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <ion-list>
+            <ion-item fill="outline" class="ion-margin-top">
+              <ion-label position="floating">Quantidade</ion-label>
+              <ion-input placeholder="Enter text" formControlName="qtd" type="number"></ion-input>
+            </ion-item>
+            <ion-item fill="outline" class="ion-margin-top">
+              <ion-label position="floating">Valor unitário</ion-label>
+              <ion-input placeholder="Enter text" formControlName="valor" type="number"></ion-input>
+            </ion-item>
+            <ion-button id="open-toast" expand="block" class="ion-margin-top" type="submit">Calcular</ion-button>
+          </ion-list>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-toast trigger="open-toast" message="Valor salvo com sucesso!" [duration]="3000"></ion-toast>
+</ion-content>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let objeto of objetosSalvosSession" class="teste">
+            <ion-label><strong>Qtd:</strong> {{ objeto.quantidade }}</ion-label>
+            <ion-label><strong>Valor:</strong> {{ objeto.valor | currency:'BRL':'symbol':'1.2-2'}}</ion-label>
+            <ion-label><strong>Total:</strong> {{ objeto.quantidade * objeto.valor | currency:'BRL':'symbol':'1.2-2' }}</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-infinite-scroll>
+          <ion-infinite-scroll-content loadingText="Please wait..."
+            loadingSpinner="bubbles"></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
 </ion-content>
