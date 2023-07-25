@@ -1,0 +1,7 @@
+{
+  "name": "CalcSuper",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
